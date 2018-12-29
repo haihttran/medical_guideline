@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kb-project>
+ <depends-on-projects/>
+ <used-by-projects/>
+ <paths>
+  <path value="C:/Users/haitht/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.9.5/jackson-core-2.9.5.jar"/>
+  <path value="C:/Users/haitht/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar"/>
+  <path value="C:/Users/haitht/.m2/repository/org/yaml/snakeyaml/1.18/snakeyaml-1.18.jar"/>
+  <path value="C:/Users/haitht/.m2/repository/commons-io/commons-io/2.6/commons-io-2.6.jar"/>
+  <path value="C:/Users/haitht/.m2/repository/org/mvel/mvel2/2.4.0.Final/mvel2-2.4.0.Final.jar"/>
+  <path value="D:/Java Library/jFuzzyLogic.jar"/>
+  <path value="C:/Users/haitht/.m2/repository/org/jeasy/easy-rules-core/3.2.0/easy-rules-core-3.2.0.jar"/>
+  <path value="C:/Users/haitht/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.9.5/jackson-dataformat-yaml-2.9.5.jar"/>
+  <path value="C:/Users/haitht/.m2/repository/org/jeasy/easy-rules-mvel/3.2.0/easy-rules-mvel-3.2.0.jar"/>
+ </paths>
+ <validation>
+  <el>
+   <linked-el length="20" name="%0" offset="1060" path="%1"/>
+   <linked-el length="16" name="%2" offset="913" path="%1"/>
+   <linked-el length="16" name="%2" offset="762" path="%1"/>
+   <linked-el length="20" name="%3" offset="1060" path="%1"/>
+   <linked-el length="16" name="%4" offset="913" path="%1"/>
+   <linked-el length="16" name="%4" offset="762" path="%1"/>
+   <linked-el length="20" name="%5" offset="1060" path="%1"/>
+  </el>
+ </validation>
+ <aliases>
+  <alias path="/inference-engine/pom.xml" value="%1"/>
+  <alias path="common" value="%0"/>
+  <alias path="jeasy.version" value="%2"/>
+  <alias path="common.io" value="%3"/>
+  <alias path="jeasy" value="%4"/>
+  <alias path="common.io.version" value="%5"/>
+ </aliases>
+ <includes/>
+ <uris/>
+</kb-project>

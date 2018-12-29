@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+<fullyQualifiedTypeName name="org.apache.commons.io.IOUtils"/>
+<fullyQualifiedTypeName name="org.springframework.util.ResourceUtils"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="java.io.DataInputStream"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
+<fullyQualifiedTypeName name="com.mongodb.operation.OrderBy"/>
+<fullyQualifiedTypeName name="java.util.Comparator"/>
+<fullyQualifiedTypeName name="org.bson.UuidRepresentation"/>
+<fullyQualifiedTypeName name="org.bson.codecs.UuidCodec"/>
+<fullyQualifiedTypeName name="com.mongodb.MongoClientSettings"/>
+<fullyQualifiedTypeName name="org.bson.codecs.configuration.CodecRegistries"/>
+<fullyQualifiedTypeName name="java.util.Stack"/>
+<fullyQualifiedTypeName name="com.mongodb.util.JSON"/>
+<fullyQualifiedTypeName name="org.mongojack.JacksonMongoCollection"/>
+<fullyQualifiedTypeName name="org.bson.codecs.pojo.PojoCodecProvider"/>
+<fullyQualifiedTypeName name="org.bson.codecs.configuration.CodecRegistry"/>
+<fullyQualifiedTypeName name="com.mongodb.MongoClientOptions"/>
+<fullyQualifiedTypeName name="org.bson.codecs.configuration.CodecProvider"/>
+<fullyQualifiedTypeName name="org.mongojack.JacksonDBCollection"/>
+<fullyQualifiedTypeName name="Utils.MongoDBQueries"/>
+<fullyQualifiedTypeName name="com.mongodb.client.model.Sorts"/>
+<fullyQualifiedTypeName name="org.bson.Document"/>
+<fullyQualifiedTypeName name="com.mongodb.MongoClient"/>
+<fullyQualifiedTypeName name="xyz.morphia.Morphia"/>
+<fullyQualifiedTypeName name="xyz.morphia.Datastore"/>
+<fullyQualifiedTypeName name="xyz.morphia.annotations.Entity"/>
+<fullyQualifiedTypeName name="xyz.morphia.annotations.Indexes"/>
+<fullyQualifiedTypeName name="xyz.morphia.annotations.Index"/>
+<fullyQualifiedTypeName name="xyz.morphia.annotations.Field"/>
+<fullyQualifiedTypeName name="xyz.morphia.annotations.Id"/>
+<fullyQualifiedTypeName name="org.bson.types.ObjectId"/>
+<fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
+<fullyQualifiedTypeName name="org.joda.time.format.DateTimeFormatter"/>
+<fullyQualifiedTypeName name="org.joda.time.format.ISODateTimeFormat"/>
+<fullyQualifiedTypeName name="xyz.morphia.query.Query"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="Utils.MongoDBUtils"/>
+<fullyQualifiedTypeName name="Utils.MongoDBConnection"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,181 @@
+package GuidelineApp;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import org.bson.Document;
+import org.bson.conversions.Bson;
+import org.json.JSONObject;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.google.gson.Gson;
+import com.mongodb.BasicDBObject;
+import com.mongodb.MongoClient;
+//import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+
+import Models.MedicalRecord;
+import Utils.MongoDBConnection;
+import Utils.Utilities;
+import xyz.morphia.Datastore;
+/*
+ * The RESTFUL Http request mapping function
+ * Receive Http requests and send Http responses
+ */
+import xyz.morphia.Morphia;
+import xyz.morphia.query.Query;
+@RestController
+public class MedicalRecordController {
+	//Create new medical record
+	final Morphia morphia = new Morphia();
+	
+	private Datastore storeConstruction() throws IOException {
+		morphia.mapPackage("Models");
+		MongoDBConnection connection = new MongoDBConnection();
+		MongoClient cl 	= connection.getClient();
+		// create the Datastore connecting to the default port on the local host
+		Datastore datastore = morphia.createDatastore(cl, "models");
+		datastore.ensureIndexes();
+		return datastore;
+	}	
+
+    @RequestMapping(value="/diagnosis",
+    		method=RequestMethod.POST,
+    		consumes="application/json",
+    		produces="application/json")
+    
+    //Get a list of relevant sicknesses based on input symptoms
+    @ResponseBody
+    public MedicalRecord diagnosis(
+    		@RequestParam("pid") String pid,
+    		@RequestParam("phId") String phid,
+    		@RequestBody String txt) throws IOException {    	
+    	JSONObject object = new JSONObject(txt);
+    	HashMap<String, Boolean> s = new HashMap<String, Boolean>();
+    	HashMap<String, Double> h = new HashMap<String, Double>();
+    	s = Utilities.parseSymptoms(object);
+    	h = Utilities.parseHealthData(object);
+    	String id = String.valueOf(System.currentTimeMillis());
+    	Date d = new Date();
+    	MedicalRecord r = new MedicalRecord(id, pid, phid, d);    	
+    	r.setResult(h, s);
+    	r.setHealth_data(Utilities.createHealthDataList(h));
+    	r.setSymptoms(Utilities.createSymptomList(s));
+    	Datastore ds = storeConstruction();
+    	ds.save(r);
+//    	try {
+//    	Gson gson = new Gson();
+//    	String json = gson.toJson(r);
+//    	Document document = new Document();
+//    	document.append("pId", r.getpId());
+//    	document.append("phId", r.getPhId());
+//    	document.append("date", r.getDate());
+//    	document.append("health_data", r.getHealth_data());
+//    	document.append("symptoms", r.getSymptoms());
+//    	document.append("result", r.getResult());
+//    	MongoDBConnection connection = new MongoDBConnection();
+////    	MongoClient cl = connection.getClient();
+//    	MongoDatabase db = connection.getDb();
+//    	MongoCollection<Document> collection = db.getCollection("medical_record");
+//    	collection.insertOne(document);    	
+//    	}
+//    	catch (IOException e){
+//    		System.out.println(e.toString());
+//    	}
+		return r;		
+    }
+    
+    //Get all historical medical records of a patient
+    @RequestMapping(value="/medical_records",
+    		method=RequestMethod.GET)
+    @ResponseBody
+    public ArrayList<Document> getMedicalRecord(
+    	@RequestParam("pid") String pid) throws IOException {    	    	
+		return this.getListOfMedicalRecord(pid);		
+    }
+    
+    //Followup patient's health data measurements
+    @RequestMapping(value="/followup",
+    		method=RequestMethod.GET)    
+    public String monitor_blood_pressure(
+    	@RequestParam("pid") String pid,
+    	@RequestParam(value = "n", defaultValue = "10") int n) throws IOException, ParseException {    	
+//    	MongoDBConnection connection = new MongoDBConnection();
+//    	//MongoClient cl 	= connection.getClient();
+//    	MongoDatabase db = connection.getDb();
+//    	MongoCollection<Document> collection = db.getCollection("medical_record");
+//    	Bson query = Filters.and(Filters.eq("pId", pid));
+//    	MongoCursor<Document> cursor = collection.find(query)
+//    								.sort(new BasicDBObject("date", -1))
+//					    			.limit(n)
+//					    			.iterator();
+    	Datastore ds = storeConstruction();
+    	List<MedicalRecord> result = ds.createQuery(MedicalRecord.class)
+    								.field("pId").equal(pid)
+    								.asList();
+    	
+    	StringBuilder blood_sugar = new StringBuilder();
+    	blood_sugar.append("{");    	
+    	String sep = "";    	    	
+    	for(MedicalRecord temp : result) {    		    		
+    		blood_sugar.append(sep);
+			blood_sugar.append(temp.getDate() + " - " 
+							+ temp.getHealth_data());			
+    		sep = "; ";    		
+    	}
+    	blood_sugar.append("}");
+    	//System.out.println(blood_sugar.toString());
+    	return blood_sugar.toString();
+    }
+    
+    private ArrayList<Document> getListOfMedicalRecord(String pid) throws IOException {
+    	MongoDBConnection connection = new MongoDBConnection();
+    	//MongoClient cl 	= connection.getClient();
+    	MongoDatabase db = connection.getDb();
+    	MongoCollection<Document> collection = db.getCollection("medical_record");
+    	Bson query = Filters.and(Filters.eq("pId", pid));
+    	MongoCursor<Document> cursor = collection.find(query)	    								
+					    			.iterator();
+    	StringBuilder blood_sugar = new StringBuilder();
+    	blood_sugar.append("{");    	
+    	ArrayList<Document> docs = new ArrayList<Document>();
+    	while(cursor.hasNext()) {
+    		docs.add(cursor.next());
+    	}
+    	return docs;
+    }
+    
+    //Return description of a sickness
+    @RequestMapping(value="/sd",
+    		method=RequestMethod.GET)
+    @ResponseBody
+    public String getSicknessDescription(
+    	@RequestParam("sId") String sicknessId) throws IOException {    	
+    	MongoDBConnection connection = new MongoDBConnection();
+    	MongoDatabase db = connection.getDb();
+    	MongoCollection<Document> collection = db.getCollection("sickness");
+    	BasicDBObject whereQuery = new BasicDBObject();
+    	whereQuery.put("disease", sicknessId);
+    	FindIterable<Document> cursor = collection.find(whereQuery).limit(1);
+    	StringBuilder tmp = new StringBuilder();
+    	for(Document doc : cursor) {
+    		tmp.append(doc.getString("name") + ": " + doc.getString("description"));
+    	}    	
+		return tmp.toString();
+    }
+}

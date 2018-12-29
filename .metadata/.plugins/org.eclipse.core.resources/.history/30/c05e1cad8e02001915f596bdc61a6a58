@@ -1,0 +1,33 @@
+package Utils;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.bson.conversions.Bson;
+
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+
+import GuidelineApp.MedicalRecord;
+
+public class MongoDBQueries {
+	private ArrayList<MedicalRecord> getListOfMedicalRecord(String pid) throws IOException {
+    	MongoDBConnection connection = new MongoDBConnection();
+    	//MongoClient cl 	= connection.getClient();
+    	MongoDatabase db = connection.getDb();
+    	MongoCollection<MedicalRecord> collection = db.getCollection("medical_record", MedicalRecord.class)
+    												.withCodecRegistry(pojoCodecRegistry);
+    	Bson query = Filters.and(Filters.eq("pId", pid));
+    	MongoCursor<MedicalRecord> cursor = collection.find(query)	    								
+					    			.iterator();
+    	StringBuilder blood_sugar = new StringBuilder();
+    	blood_sugar.append("{");    	
+    	ArrayList<MedicalRecord> docs = new ArrayList<MedicalRecord>();
+    	while(cursor.hasNext()) {
+    		docs.add(cursor.next());
+    	}
+    	return docs;
+    }
+}

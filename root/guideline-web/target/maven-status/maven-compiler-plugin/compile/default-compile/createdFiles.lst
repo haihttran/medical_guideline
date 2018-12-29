@@ -1,0 +1,8 @@
+Models\MedicalRecord.class
+Utils\MongoDBUtils.class
+Utils\Utilities.class
+Models\Patient.class
+Models\Result.class
+GuidelineApp\MedicalRecordController.class
+Utils\MongoDBConnection.class
+GuidelineApp\Application.class

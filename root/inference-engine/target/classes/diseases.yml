@@ -1,0 +1,185 @@
+---
+name: "cholera"
+description: "watery diarrhea (~'rice-water stools');nausea; vomiting; 
+              elevated heart rate; loss of skin turgor;dry mucous membranes;hypotension;thirst"
+condition: "(diarrhea == true) && (nausea == true) && (elavated_heart_rate == true) && (loss_of_skin_tugor == true)
+           && (dry_mucous_membranes == true) && (thirst == true)" 
+actions:
+  - "System.out.println(\"<<cholera>>\");"
+---
+name: "diphtheria-respiratory"
+description: "mild fever (rarely >101°F [38.3°C]), sore throat, difficulty swallowing, malaise, loss of appetite"
+condition:  "(body_temperature >= 38.1) && (sore_throat == true) && (difficultly_swallowing == true)
+              && (malaise == true) && (loss_of_appetite == true) && ((nose_membrane == true)
+              || (pharynx_membrane == true) || (tonsil_membrane == true) || (larynx_membrane == true)
+              || (trachea_membrane == true)) && (larynx_hoarness == true) && (pseudo_membrane == true)"
+actions:
+  - "System.out.println(\"<<diphtheria-respiratory>>\");"
+---
+name: "diphtheria-cutaneous"
+description: "mild fever (rarely >101°F [38.3°C]), sore throat, difficulty swallowing, malaise, loss of appetite"
+condition:  "(body_temperature >= 38.1) && (sore_throat == true) && (difficultly_swallowing == true)
+              && (malaise == true) && (loss_of_appetite == true) && (skin_membrane == true)"
+actions:
+  - "System.out.println(\"<<diphtheria-cutaneous>>\");"
+---
+name: "diphtheria-nasal"
+description: "mild fever (rarely >101°F [38.3°C]), sore throat, difficulty swallowing, malaise, loss of appetite"
+condition:  "(body_temperature >= 38.1) && (sore_throat == true) && (difficultly_swallowing == true)
+              && (malaise == true) && (loss_of_appetite == true) && (blood_stinged_nasal_discharge == true)"
+actions:
+  - "System.out.println(\"<<diphtheria-nasal>>\");"
+---
+name: "fascioliasis1"
+description: "fascioliasis - early stage: asymptomatic; marked eosinophilia, abdominal pain, intermittent high fever, weight loss, or urticaria"
+condition: "(marked_eosinophillia == true) && (abdominal_pain == true) && (body_temperature >= 38.1)"
+actions:
+  - "System.out.println(\"<<fascioliasis-early_stage>>\");"
+---
+name: "fascioliasis2"
+description: "fascioliasis - late stage: biliary colic, epigastric pain, nausea, jaundice, or pruritus"
+condition: "(biliary_colic == true) && (epigastric_pain == true) && (nausea == true) && ((jaundice == true) || (pruritus == true))"
+actions:
+  - "System.out.println(\"<<fascioliasis-late_stage>>\");"
+---
+name: "giardiasis"
+description: "asymptomatic; diarrhea, abdominal cramps, bloating, flatulence, fatigue,
+               anorexia, and nausea, (Reactive arthritis, irritable bowel syndrome)"
+condition: "(diarrhea == true) && (abdominal_cramps == true) && (bloating == true) && (flatulence == true)
+            && (fatigue == true) && (anorexia == true) && (nausea == true)"
+actions:
+  - "System.out.println(\"<<giardiasis>>\");"
+---
+name: "hepatitis-a"
+description: "(children<6 years: asymptomatic)  fever, malaise, anorexia, nausea, abdominal discomfort/ later: jaundice"
+condition: "(body_temperature >= 38.1) && (malaise == true) && (anorexia == true) && (nausea == true)
+            && (abdominal_discomfort == true) && (jaundice == true)"
+actions:
+  - "System.out.println(\"<<hepatitis-a>>\");"
+---
+name: "histoplasmosis"
+description: "Asymptomatic (90%);  high fever, headache, nonproductive cough, chills, weakness, pleuritic chest pain, fatigue"
+condition: "(body_temperature >= 39.0) && (headache == true) && (nonproductive_cough == true) && (chills == true)
+            && (weakness == true) && (chest_pain == true) && (fatigue == true)"
+actions:
+  - "System.out.println(\"<<histoplasmosis>>\");"  
+---
+name: "legionellosis"
+description: "pneumonia"
+condition: "(pneumonia == true)"
+actions:
+  - "System.out.println(\"<<legionellosis>>\");"
+---
+name: "leishmaniasis-cutaneous"
+description: "skin lesions (open or closed sores)"
+condition: "(open_sores == true) || (closed_sores)"
+actions:
+  - "System.out.println(\"<<leishmaniasis-cutaneous>>\");"
+---
+name: "lyme"
+description: "red, expanding rash; fatigue, fever, headache, mild stiff neck, arthralgia, or myalgia/ later:meningitis,
+              radiculopathy, and facial palsy"
+condition: "((red_rash == true) && (fatigue == true) && (body_temperature >= 38.1) &&
+            (headache == true) && (stiff_neck == true) && (arthralgia == true) || (myalgia == true))
+            || ((meningitis == true) && (radiculopathy == true) && (facial_palsy == true))"
+actions:
+  - "System.out.println(\"<<lyme>>\");"
+---
+name: "malaria"
+description: "fever, chills, headache, myalgia, and malaise, 
+            anemia and jaundice, seizures, mental confusion, kidney failure, acute respiratory, distress syndrome, coma, death"
+condition: "(body_temperature >= 38.1) && (chills == true) && (headache == true) && (myalgia == true) && (malaise == true)
+            && (anemia == true) && (jaundice == true) && (seizures == true) && (mental_confusion == true) && (kidney_failure == true)
+            && (acute_respiratory == true) && (distress_syndrome == true)"
+actions:
+  - "System.out.println(\"<<malaria>>\");"
+---
+name: "measles"
+description: "fever, rash (after 14 days), conjunctivitis, coryza, cough, small spots"
+condition: "(body_temperature >= 38.1) && (rash ==true) && (conjuntivitis == true) &&
+           (coryza == true) && (cough == true) && (small_pox == true)"
+actions:
+  - "System.out.println(\"<<measles>>\");"
+---
+name: "melioidosis"
+description: "subclinical infection, localized infection (such as cutaneous abscess),
+               pneumonia, meningoencephalitis, sepsis, or chronic suppurative infection"
+condition: "(pneumonia == true) && (meningoencephalitis == true) 
+            && (sepsis == true) && (chronic_suppurative_infection == true)"
+actions:
+  - "System.out.println(\"<<melioidosis>>\");"
+---
+name: "mumps"
+description: " fever, headache, malaise, myalgia, and anorexia, unilateral or bilateral swelling of the parotid glands; asymptomatic"
+condition: "(body_temperature >= 38.1) && (headache == true) && (malaise == true) && (myalgia == true)
+            && (anorexia == true) && (parotid_glands_swelling == true)"
+actions:
+  - "System.out.println(\"<<mumps>>\");"
+---
+name: "norovirus"
+description: "vomiting with nonbloody diarrhea, abdominal cramps, nausea"
+condition: "(vomit == true) && (diarrhea == true) && (abdominal_cramps == true) && (nausea == true)"
+actions:
+  - "System.out.println(\"<<norovirus>>\");"
+---
+name: "onchocerciasis"
+description: "rash, pruritus"
+condition: "(rash == true) && (pruritus == true)"
+actions:
+  - "System.out.println(\"<<onchocerciasis>>\");"
+---
+name: "pertussis"
+description: "cough, vomitting"
+condition: "(cough == true) && (vomit == true)"
+actions:
+  - "System.out.println(\"<<pertussis>>\");"
+---
+name: "rubella"
+description: "maculopapular, generalized rash, low-grade fever, malaise, anorexia, 
+              mild conjunctivitis, runny nose, sore throat; asymptomatic"
+condition: "(rash == true) && (body_temperature >= 38.1)
+           && (malaise == true) && (anorexia == true)
+           && (mild_conjunctivitis == true) && (runny_nose == true)
+           && (sore_throat == true)"
+actions:
+  - "System.out.println(\"<<rubella>>\");"
+---
+name: "rabies"
+description: "Pain, paresthesia, fever and vague symptoms to an acute, progressive encephalitis"
+condition: "(pain == true) && (paresthesia == true) && (body_temperature >= 38.1)
+            && (progressive_encephalitis == true)"
+actions:
+  - "System.out.println(\"<<rabies>>\");"
+---
+name: "q-fever"
+description: "asymptomatic (50%+);  influenza like illness, with pneumonia or hepatitis"
+condition: "(body_temperature >= 38.1) && ((chills == true) || (sweat == true))
+           && (cough == true) && (chest_pain == true) && (headache == true)
+           && (colored_stool == true) && (diarrhea == true) && (nausea == true)
+           && (abdominal_pain == true) && (jaundice == true) && (muscle_pain == true)
+           && (shortness_of_breath == true)"
+actions:
+  - "System.out.println(\"<<q-fever>>\");"
+---
+name: "scabies"
+description: "intense itching (particularly at night) and by a papular or papulovesicular erythematous rash"
+condition: "(intense_itching == true) && (papular_rash == true) 
+            && (papulovesicular_erythematous_rash == true)"
+actions:
+  - "System.out.println(\"<<scabies>>\");"
+---
+name: "smallpox"
+description: "fever >101°F (38.3°C), malaise, head and body aches, vomiting, rash"
+condition: "(body_temperature >= 38.3) && (malaise == true)
+            && (headache == true) && (pain == true) && (vomit == true)
+            && (rash == true)"
+actions:
+  - "System.out.println(\"<<smallpox>>\");"
+---
+name: "tuberculosis"
+description: "prolonged cough, fever, decreased appetite, weight loss, 
+              night sweats, and coughing up blood"
+condition: "(cough == true) && (body_temperature >= 38.1) && (loss_of_appetite == true)
+            && (weight_loss == true) && (night_sweat == true) && (blood_coughing == true)"
+actions:
+  - "System.out.println(\"<<tuberculosis>>\");"

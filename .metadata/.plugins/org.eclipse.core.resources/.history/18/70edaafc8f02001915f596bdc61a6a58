@@ -1,0 +1,47 @@
+package Utils;
+
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoDatabase;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+public class MongoDBConnection {
+	
+	private MongoClient cl ;
+	private MongoDatabase db;
+	
+	public MongoDBConnection() throws IOException {
+		this.createMongoDBConnection();
+	}
+	
+	public void createMongoDBConnection() throws IOException {
+		Properties prop = new Properties();
+		String propFile = "DBConfig.properties";
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFile);
+		if (inputStream != null) {
+			prop.load(inputStream);
+		} else {
+			throw new FileNotFoundException("property file '" + propFile + "' not found in the classpath");
+		}
+		String username = prop.getProperty("USRNM");
+		String password = prop.getProperty("PSSWD");
+		String host = prop.getProperty("HOST");
+		String port = prop.getProperty("PORT");
+		String dbName = prop.getProperty("DB");
+		MongoClientURI uri = new MongoClientURI("mongodb://" + username + ":" + password + "@" + host + ":" + port + "/" + dbName);
+		MongoClient mongoClient = new MongoClient(uri);
+		this.cl = mongoClient;
+		this.db = this.cl.getDatabase(dbName);
+	}
+
+	public MongoDatabase getDb() {
+		return this.db;
+	}	
+	
+	public MongoClient getClient() {
+		return this.cl;
+	}
+}

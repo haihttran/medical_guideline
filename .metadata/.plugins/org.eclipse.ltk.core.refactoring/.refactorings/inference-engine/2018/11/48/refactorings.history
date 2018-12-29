@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;inference-engine/src/main/resources/diseases.yml&apos; to &apos;diseases1.yml&apos;" description="Rename resource &apos;diseases.yml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/diseases.yml" name="diseases1.yml" stamp="1543464472396" updateReferences="true"/>
+</session>

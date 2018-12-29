@@ -1,0 +1,67 @@
+package Utils;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bson.Document;
+import org.bson.conversions.Bson;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Sorts;
+
+import Models.MedicalRecord;
+import xyz.morphia.Datastore;
+import xyz.morphia.Morphia;
+import xyz.morphia.query.Query;
+
+public class MongoDBUtils {
+	
+	final Morphia morphia = new Morphia();
+	
+	public Datastore storeConstruction() throws IOException {
+		morphia.mapPackage("Models");
+		MongoDBConnection connection = new MongoDBConnection();
+		MongoClient cl 	= connection.getClient();
+		// create the Datastore connecting to the default port on the local host
+		Datastore datastore = morphia.createDatastore(cl, "expert_system");
+		datastore.ensureIndexes();
+		return datastore;
+	}
+	    
+    public ArrayList<MedicalRecord> getListOfMedicalRecord(String pid) throws IOException {
+    	Datastore ds = storeConstruction();
+    	Query<MedicalRecord> query = ds.createQuery(MedicalRecord.class);
+    	List<MedicalRecord> result = query
+    								.field("pId").equal(pid)
+    								.order("-date")
+    								.asList();
+    	   	
+    	ArrayList<MedicalRecord> docs = new ArrayList<MedicalRecord>();
+    	for(MedicalRecord r : result) {
+    		docs.add(r);
+    	}
+    	return docs;
+    }
+		
+	public ArrayList<Document> getListOfSicknesses() throws IOException {
+    	MongoDBConnection connection = new MongoDBConnection();
+    	//MongoClient cl 	= connection.getClient();
+    	MongoDatabase db = connection.getDb();
+    	MongoCollection<Document> collection = db.getCollection("sickness");
+    	//Bson query = Filters.and(Filters.eq("disease", sid));
+    	MongoCursor<Document> cursor = collection.find().sort(Sorts.descending("name"))	    								
+					    			.iterator();
+    	StringBuilder blood_sugar = new StringBuilder();
+    	blood_sugar.append("{");    	
+    	ArrayList<Document> docs = new ArrayList<Document>();
+    	while(cursor.hasNext()) {
+    		docs.add(cursor.next());
+    	}
+    	return docs;
+    }
+}

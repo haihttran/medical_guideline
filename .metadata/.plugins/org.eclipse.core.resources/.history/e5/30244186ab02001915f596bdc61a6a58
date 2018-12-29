@@ -1,0 +1,86 @@
+package GuidelineApp;
+
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+
+public class MedicalRecord {
+	
+//	private String id; //Medical Record ID
+	private String pId; //Patient ID
+	private String phId; //Physician ID
+	public String getPhId() {
+		return phId;
+	}
+
+	public void setPhId(String phId) {
+		this.phId = phId;
+	}
+
+	private Date date; //Created Date
+	private String health_data; //Health Data
+	
+	public String getHealth_data() {
+		return health_data;
+	}
+
+	public void setHealth_data(String health_data) {
+		this.health_data = health_data;
+	}
+
+	private String symptoms; //Symptoms
+	private String result; //Result
+	
+//	public String getId() {
+//		return id;
+//	}
+
+	public String getSymptoms() {
+		return symptoms;
+	}
+
+	public String getpId() {
+		return pId;
+	}
+	
+	public void setpId(String pId) {
+		this.pId = pId;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+	
+	public void setSymptoms(String symptoms) {
+		this.symptoms = symptoms;
+	}
+	
+	public MedicalRecord() {	
+	}
+
+	public MedicalRecord(String pId, String phId, Date date) {
+		this.pId = pId;
+		this.phId = phId;
+		this.date = date;
+	}
+	
+	public void setResult(HashMap<String, Double> h, HashMap<String, Boolean> s) {
+		try {
+		this.result = Result.getDiagnosis(h, s);
+		} catch (IOException e) {}
+	}
+	
+	public String getResult() {
+		return result;
+	}
+}
+
+
